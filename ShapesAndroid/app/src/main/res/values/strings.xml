@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Shapes</string>
+    <string name="title_home">Home</string>
+    <string name="title_explore">Explore</string>
+    <string name="title_saved">Saved</string>
+    <string name="title_people">People</string>
+    <string name="title_add_post">Create</string>
+    <string name="title_profile">Profile</string>
+</resources>
