@@ -13,6 +13,11 @@ public class SavedViewModel extends ViewModel {
     }
 
     public LiveData<String> getText() {
+        // Simulated data loading process
+        // For demonstration, let's say we're loading saved posts from a repository
+        // Replace this with data loading logic
+        String peopleData = "saved post data";
+        mText.setValue(peopleData);
         return mText;
     }
 }

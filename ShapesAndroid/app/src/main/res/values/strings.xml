@@ -4,6 +4,8 @@
     <string name="title_explore">Explore</string>
     <string name="title_saved">Saved</string>
     <string name="title_people">People</string>
-    <string name="title_add_post">Create</string>
+    <string name="title_add_post">Post</string>
     <string name="title_profile">Profile</string>
+    <string name="enter_your_post_here">Enter text here</string>
+    <string name="add_post">Create Post</string>
 </resources>

@@ -24,14 +24,14 @@
         tools:layout="@layout/fragment_people" />
 
     <fragment
-        android:id="@+id/navigation_saved"
-        android:name="com.example.myapplication.ui.saved.SavedFragment"
-        android:label="@string/title_saved"
-        tools:layout="@layout/fragment_saved" />
-
-    <fragment
         android:id="@+id/navigation_add_post"
-        android:name="com.example.myapplication.ui.add_post.Add_Post_Fragment"
+        android:name="com.example.myapplication.ui.addpost.AddPostFragment"
         android:label="@string/title_add_post"
         tools:layout="@layout/fragment_add_post" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.myapplication.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

@@ -13,6 +13,11 @@ public class HomeViewModel extends ViewModel {
     }
 
     public LiveData<String> getText() {
+        // Simulated data loading process
+        // For demonstration, let's say we're loading follow user post from a repository
+        // Replace this with data loading logic
+        String peopleData = "Follow post's data";
+        mText.setValue(peopleData);
         return mText;
     }
 }

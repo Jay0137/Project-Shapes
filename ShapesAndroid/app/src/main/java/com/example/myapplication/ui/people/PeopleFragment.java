@@ -25,7 +25,10 @@ public class PeopleFragment extends Fragment {
         View root = binding.getRoot();
 
         final TextView textView = binding.textPeople;
-        peopleViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        peopleViewModel.getText().observe(getViewLifecycleOwner(), text -> {
+            // Update the UI here
+            textView.setText(text);
+        });
         return root;
     }
 
