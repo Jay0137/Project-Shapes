@@ -8,4 +8,13 @@
     <string name="title_profile">Profile</string>
     <string name="enter_your_post_here">Enter text here</string>
     <string name="add_post">Create Post</string>
+    <string name="liked">Liked</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="name">Name</string>
+    <string name="app_logo">App logo</string>
 </resources>
