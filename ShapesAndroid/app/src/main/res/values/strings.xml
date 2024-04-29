@@ -17,4 +17,10 @@
     <string name="username">Username</string>
     <string name="name">Name</string>
     <string name="app_logo">App logo</string>
+    <string name="log_in">Log in</string>
+    <string name="image">Image</string>
+    <string name="upload">Upload</string>
+    <string name="Logout_message">Are you sure you want to logout?</string>
+    <string name="theme">Theme</string>
+    <string name="filter">Filter</string>
 </resources>

@@ -7,36 +7,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.addpost.AddPostFragment"
-    android:orientation="horizontal">
-
-    <EditText
-        android:id="@+id/editTextPost"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:hint="@string/enter_your_post_here" />
+        android:layout_height="match_parent"
+        tools:context=".ui.upload.AddPostFragment"
+        android:orientation="horizontal">
 
+        <EditText
+            android:id="@+id/editTextPost"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginEnd="30dp"
+            android:hint="@string/enter_your_post_here"
+            android:autofillHints=""
+            android:inputType="text" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/upload"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/ic_upload"
+        android:contentDescription="@string/upload"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_gravity="center"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabAddPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add_post"
         android:focusable="true"
         android:contentDescription="@string/add_post" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

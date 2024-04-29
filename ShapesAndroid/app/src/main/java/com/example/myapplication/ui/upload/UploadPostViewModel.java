@@ -1,14 +1,14 @@
-package com.example.myapplication.ui.addpost;
+package com.example.myapplication.ui.upload;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class AddPostViewModel extends ViewModel {
+public class UploadPostViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public AddPostViewModel() {
+    public UploadPostViewModel() {
         mText = new MutableLiveData<>();
     }
 

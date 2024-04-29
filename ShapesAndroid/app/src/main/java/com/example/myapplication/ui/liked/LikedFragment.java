@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,7 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.example.myapplication.R;
+import com.example.myapplication.ui.post.Post;
+import com.example.myapplication.ui.post.PostStorage;
+
 import java.util.List;
 
 public class LikedFragment extends Fragment {
@@ -27,16 +29,14 @@ public class LikedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_liked, container, false);
 
         // Initialize RecyclerView
-        recyclerView = view.findViewById(R.id.recyclerViewLiked);
+        recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Initialize likedPosts list
-        likedPosts = new ArrayList<>();
+        // Create an instance of PostStorage
+        PostStorage postStorage = new PostStorage(getContext());
 
-        // Add dummy liked posts (Replace with actual liked posts data)
-        likedPosts.add(new Post("Post 1", "Content of Post 1", true));
-        likedPosts.add(new Post("Post 2", "Content of Post 2", true));
-        likedPosts.add(new Post("Post 3", "Content of Post 3", true));
+        // Retrieve posts
+        likedPosts = postStorage.getPosts();
 
         // Initialize and set adapter
         likedPostAdapter = new LikedPostAdapter(likedPosts);
@@ -45,4 +45,3 @@ public class LikedFragment extends Fragment {
         return view;
     }
 }
-

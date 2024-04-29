@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_host_fragment_filter">
+
+    <fragment
+        android:id="@+id/navigation_setting"
+        android:icon="@drawable/ic_setting"
+        android:label="@string/settings"
+        tools:layout="@layout/fragment_settings"/>
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.myapplication.ui.profile.ProfileFragment"
+        android:icon="@drawable/ic_user"
+        android:label="@string/title_profile"/>
+
+    <fragment
+        android:id="@+id/navigation_saved"
+        android:name="com.example.myapplication.ui.saved.SavedFragment"
+        android:icon="@drawable/ic_saved"
+        android:label="@string/title_saved"
+        tools:layout="@layout/fragment_saved" />
+
+    <fragment
+        android:id="@+id/navigation_liked"
+        android:name="com.example.myapplication.ui.liked.LikedFragment"
+        android:label="@string/liked"
+        android:icon="@drawable/ic_liked"
+        tools:layout="@layout/fragment_liked" />
+
+    <fragment
+        android:id="@+id/navigation_logout"
+        android:icon="@drawable/ic_logout"
+        android:label="@string/logout"
+        tools:layout="@layout/activity_logout" />
+
+</navigation>

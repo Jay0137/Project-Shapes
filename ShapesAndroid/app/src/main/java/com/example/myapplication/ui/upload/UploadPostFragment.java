@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.addpost;
+package com.example.myapplication.ui.upload;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,14 +13,14 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.myapplication.databinding.FragmentAddPostBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class AddPostFragment extends Fragment {
+public class UploadPostFragment extends Fragment {
 
     private FragmentAddPostBinding binding;
-    private AddPostViewModel addPostViewModel;
+    private UploadPostViewModel addPostViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        addPostViewModel = new ViewModelProvider(this).get(AddPostViewModel.class);
+        addPostViewModel = new ViewModelProvider(this).get(UploadPostViewModel.class);
 
         binding = FragmentAddPostBinding.inflate(inflater, container, false);
         View root = binding.getRoot();

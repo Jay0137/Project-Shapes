@@ -22,7 +22,7 @@
         android:title="@string/title_people"/>
 
     <item
-        android:id="@+id/navigation_profile"
-        android:icon="@drawable/ic_user"
-        android:title="@string/title_profile"/>
+        android:id="@+id/navigation_filter"
+        android:icon="@drawable/ic_filter"
+        android:title="@string/filter"/>
 </menu>
