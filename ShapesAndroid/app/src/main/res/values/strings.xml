@@ -23,4 +23,5 @@
     <string name="Logout_message">Are you sure you want to logout?</string>
     <string name="theme">Theme</string>
     <string name="filter">Filter</string>
+    <string name="new_account">Don\'t have account go to Sign in.</string>
 </resources>

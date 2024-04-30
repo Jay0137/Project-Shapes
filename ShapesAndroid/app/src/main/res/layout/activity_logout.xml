@@ -23,6 +23,7 @@
         android:layout_marginTop="30dp"
         android:text="@string/logout"
         android:layout_below="@id/logout_message"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        />
 
 </RelativeLayout>

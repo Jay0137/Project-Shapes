@@ -1,15 +1,16 @@
 package com.example.myapplication.ui.logout;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.myapplication.R;
 import com.example.myapplication.ui.login.LoginActivity;
 
-public class LogoutActivity extends Activity {
+public class LogoutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,22 +20,14 @@ public class LogoutActivity extends Activity {
         Button logoutButton = findViewById(R.id.logout_button);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                // Perform logout actions here
-                // For example, clear user session, navigate to login screen, etc.
-                logout();
+            public void onClick(View v) {
+                // Perform logout action here
+                // For example, clear user session, shared preferences, or any other relevant data
+                // Then navigate to the login page
+                Intent intent = new Intent(LogoutActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish(); // This closes the current activity so the user cannot navigate back to it using the back button
             }
         });
-    }
-
-    private void logout() {
-        // Add your logout logic here
-        // For example: clearing user session, starting login activity, etc.
-
-        // Example: Navigating back to the login activity
-        Intent intent = new Intent(LogoutActivity.this, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-        finish();
     }
 }

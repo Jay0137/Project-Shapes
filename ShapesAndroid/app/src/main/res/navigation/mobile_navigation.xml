@@ -31,6 +31,7 @@
 
     <fragment
         android:id="@+id/navigation_filter"
+        android:name="com.example.myapplication.ui.filter.FilterFragment"
         android:label="@string/filter"
         android:layout="@layout/activity_filter" />
 
