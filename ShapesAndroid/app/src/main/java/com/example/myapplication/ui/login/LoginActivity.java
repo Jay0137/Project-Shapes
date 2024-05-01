@@ -59,8 +59,9 @@ public class LoginActivity extends Activity {
         return username.equals("admin") && password.equals("password");
     }
 
-    public void Login_to_Register(View view) {
-        Intent intent = new Intent(this, RegisterActivity.class); // Replace SignUpActivity with the activity you want to navigate to
+    // Method to navigate to RegisterActivity
+    public void navigateToRegister(View view) {
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 }

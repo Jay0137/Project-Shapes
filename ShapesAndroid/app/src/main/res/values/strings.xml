@@ -24,4 +24,5 @@
     <string name="theme">Theme</string>
     <string name="filter">Filter</string>
     <string name="new_account">Don\'t have account go to Sign in.</string>
+    <string name="account">Already have a account go to Log in.</string>
 </resources>
