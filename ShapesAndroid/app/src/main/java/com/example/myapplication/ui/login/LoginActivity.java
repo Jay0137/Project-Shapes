@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
 import com.example.myapplication.ui.register.RegisterActivity;
 
@@ -21,7 +22,14 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+
+        // Check if user is already logged in
+        if (isLoggedIn()) {
+            launchMainActivity();
+            return;
+        }
+
+        setContentView(R.layout.fragment_login);
 
         // Initialize EditText and Button
         emailEditText = findViewById(R.id.Email);
@@ -41,9 +49,9 @@ public class LoginActivity extends Activity {
 
                 // Check if authentication is successful
                 if (isAuthenticated) {
-                    // If authentication is successful, navigate to the next activity (or perform desired action)
+                    // If authentication is successful, launch MainActivity
                     Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                    // Here you can start a new activity or perform any action as needed
+                    launchMainActivity();
                 } else {
                     // If authentication fails, show an error message
                     Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
@@ -59,9 +67,23 @@ public class LoginActivity extends Activity {
         return username.equals("admin") && password.equals("password");
     }
 
-    // Method to navigate to RegisterActivity
+    // Method to navigate to RegisterFragment
     public void navigateToRegister(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
+    }
+
+    // Method to check if the user is logged in (replace with your authentication logic)
+    private boolean isLoggedIn() {
+        // You can implement your logic here to check if the user is already logged in
+        // For demonstration purposes, always return false
+        return false;
+    }
+
+    // Method to launch MainActivity
+    private void launchMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish(); // Finish LoginFragment so that pressing back won't return to it
     }
 }

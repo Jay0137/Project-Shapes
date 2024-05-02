@@ -5,22 +5,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.upload.AddPostFragment"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        tools:context=".ui.upload.AddPostFragment">
 
         <EditText
             android:id="@+id/editTextPost"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginBottom="30dp"
-            android:layout_marginEnd="30dp"
             android:hint="@string/enter_your_post_here"
             android:autofillHints=""
             android:inputType="text" />
@@ -42,8 +42,7 @@
         android:id="@+id/fabAddPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
+
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
