@@ -1,57 +1,44 @@
 package com.example.myapplication.ui.filter;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.myapplication.databinding.FragmentFilterBinding;
-
+import com.example.myapplication.R;
+import com.example.myapplication.ui.setting.SettingFragment;
 
 public class FilterFragment extends Fragment {
 
-    private FragmentFilterBinding binding;
-
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        FilterViewModel filterViewModel =
-                new ViewModelProvider(this).get(FilterViewModel.class);
-
-        binding = FragmentFilterBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        return root;
+    public FilterFragment() {
+        // Required empty public constructor
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_filter, container, false);
+
+        Button settingsButton = view.findViewById(R.id.button_settings);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSettingsPage();
+            }
+        });
+
+        // Add similar click listeners for other buttons
+
+        return view;
     }
 
-    public void navigateToPage1(View view) {
-        // Navigate to page 1
+    private void openSettingsPage() {
+        // Navigate to the Settings activity
+        Intent intent = new Intent(getActivity(), SettingFragment.class);
+        startActivity(intent);
     }
-
-    public void navigateToPage2(View view) {
-        // Navigate to page 2
-    }
-
-    public void navigateToPage3(View view) {
-        // Navigate to page 3
-    }
-
-    public void navigateToPage4(View view) {
-        // Navigate to page 4
-    }
-
-    public void navigateToPage5(View view) {
-        // Navigate to page 5
-    }
-
-
 }
