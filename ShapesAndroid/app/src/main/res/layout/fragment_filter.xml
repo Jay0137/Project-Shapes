@@ -4,18 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_weight="1">
+    android:layout_weight="1"
+    tools:context=".ui.filter.FilterFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        tools:ignore="InefficientWeight,UselessParent">
+        tools:ignore="UselessParent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,6 +29,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/settings"
                 android:src="@drawable/ic_setting"
                 android:layout_gravity="center_vertical"/>
 
@@ -36,9 +37,10 @@
                 android:id="@+id/button_settings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/settings"
                 android:contextClickable="true"
-                />
+                android:onClick="ToSettings"
+                android:text="@string/settings"
+                android:name="com.example.myapplication.ui.setting.SettingFragment"/>
 
         </LinearLayout>
 
@@ -56,6 +58,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/title_profile"
                 android:src="@drawable/ic_profile"
                 android:layout_gravity="center_vertical"/>
 
@@ -63,7 +66,8 @@
                 android:id="@+id/button_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/title_profile"/>
+                android:text="@string/title_profile"
+                android:onClick="ToProfile"/>
 
         </LinearLayout>
 
@@ -79,14 +83,16 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_profile"
+                android:contentDescription="@string/title_saved"
+                android:src="@drawable/ic_saved"
                 android:layout_gravity="center_vertical"/>
 
             <Button
                 android:id="@+id/button_saved"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/title_saved"/>
+                android:text="@string/title_saved"
+                android:onClick="ToSaved"/>
 
         </LinearLayout>
 
@@ -102,6 +108,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/liked"
                 android:src="@drawable/ic_liked"
                 android:layout_gravity="center_vertical"/>
 
@@ -109,7 +116,8 @@
                 android:id="@+id/button_liked"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/liked"/>
+                android:text="@string/liked"
+                android:onClick="ToLiked"/>
 
         </LinearLayout>
 
@@ -125,6 +133,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/logout"
             android:src="@drawable/ic_logout"
             android:layout_gravity="center_vertical"/>
 
@@ -132,7 +141,8 @@
             android:id="@+id/button_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/logout"/>
+            android:text="@string/logout"
+            android:onClick="ToLogout"/>
 
     </LinearLayout>
 

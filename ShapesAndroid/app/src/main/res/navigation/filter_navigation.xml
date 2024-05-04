@@ -2,13 +2,14 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/filter_navigation">
+    android:id="@+id/filter_navigation"
+    app:startDestination="@+id/nav_filter">
 
     <fragment
         android:id="@+id/nav_settings"
         android:name="com.example.myapplication.ui.setting.SettingFragment"
         android:label="@string/settings"
-        tools:layout="@layout/fragment_settings"/>
+        tools:layout="@layout/fragment_setting"/>
 
     <fragment
         android:id="@+id/nav_profile"

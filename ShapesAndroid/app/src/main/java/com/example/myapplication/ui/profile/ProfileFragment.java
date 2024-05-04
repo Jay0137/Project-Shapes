@@ -9,41 +9,30 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.myapplication.databinding.FragmentProfileBinding;
+import com.example.myapplication.R;
 
 public class ProfileFragment extends Fragment {
-    private FragmentProfileBinding binding;
-    private ProfileViewModel profileViewModel;
+
+    public ProfileFragment() {
+        // Required empty public constructor
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentProfileBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-        return root;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        profileViewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        // Find the TextView
+        TextView profileTextView = view.findViewById(R.id.text_profile);
 
-        final TextView textView = binding.textProfile;
-        profileViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String text) {
-                textView.setText(text);
-            }
-        });
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+        // Set text or perform any other operations
+        profileTextView.setText("Profile Fragment");
     }
 }
-
