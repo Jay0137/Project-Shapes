@@ -39,12 +39,12 @@
 
         <!-- Text on the left -->
         <TextView
-            android:id="@+id/View"
+            android:id="@+id/theme2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="@string/theme" />
+            android:text="theme2" /> <!-- Use another string resource here -->
 
         <!-- Switch on the right -->
         <com.google.android.material.switchmaterial.SwitchMaterial

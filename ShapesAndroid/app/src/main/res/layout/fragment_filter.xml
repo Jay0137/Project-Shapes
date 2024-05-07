@@ -38,9 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contextClickable="true"
-                android:onClick="ToSettings"
-                android:text="@string/settings"
-                android:name="com.example.myapplication.ui.setting.SettingFragment"/>
+                android:text="@string/settings"/>
+
 
         </LinearLayout>
 
@@ -66,8 +65,7 @@
                 android:id="@+id/button_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/title_profile"
-                android:onClick="ToProfile"/>
+                android:text="@string/title_profile"/>
 
         </LinearLayout>
 
@@ -91,8 +89,7 @@
                 android:id="@+id/button_saved"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/title_saved"
-                android:onClick="ToSaved"/>
+                android:text="@string/title_saved"/>
 
         </LinearLayout>
 
@@ -116,8 +113,7 @@
                 android:id="@+id/button_liked"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/liked"
-                android:onClick="ToLiked"/>
+                android:text="@string/liked"/>
 
         </LinearLayout>
 
@@ -141,8 +137,7 @@
             android:id="@+id/button_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/logout"
-            android:onClick="ToLogout"/>
+            android:text="@string/logout"/>
 
     </LinearLayout>
 
