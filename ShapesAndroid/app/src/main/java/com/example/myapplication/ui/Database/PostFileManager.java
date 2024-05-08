@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.post;
+package com.example.myapplication.ui.Database;
 import android.content.Context;
 import java.io.File;
 import java.io.FileOutputStream;

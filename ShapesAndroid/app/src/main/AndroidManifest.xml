@@ -44,7 +44,11 @@
         <activity
             android:name=".ui.profile.ProfileActivity"
             android:exported="true" />
-
+        <activity android:name=".ui.saved.SavedActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.liked.LikedActivity"
+            android:exported="true" />
 
         <activity
             android:name=".ui.logout.LogoutActivity"

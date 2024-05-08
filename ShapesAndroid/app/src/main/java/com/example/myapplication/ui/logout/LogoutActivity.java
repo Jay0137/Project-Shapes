@@ -1,18 +1,16 @@
 package com.example.myapplication.ui.logout;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.R;
+import com.example.myapplication.ui.login.LoginActivity;
+
+
 public class LogoutActivity extends AppCompatActivity {
 
     @Override
@@ -20,10 +18,27 @@ public class LogoutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_logout);
 
+        Button logoutButton = findViewById(R.id.logout_button);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+        public void onClick(View v) {
+            // Perform logout action
+            // For example, clear user session, reset preferences, etc.
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.commit();
+            System.out.println("Logout");
+
+            // Redirect the user to the login page
+            Intent intent = new Intent(LogoutActivity.this, LoginActivity.class);
+            // Clear the back stack to prevent the user from returning to the previous screens after logout
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
+    });
     }
+
+    // Method to handle back button click
+    public void Back(View view) {
+        onBackPressed();
+    }
+
 }
 

@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.post;
+package com.example.myapplication.ui.Database;
 
 import java.util.ArrayList;
 import java.util.List;

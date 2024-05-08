@@ -8,7 +8,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import androidx.fragment.app.Fragment;
 import com.example.myapplication.R;
+import com.example.myapplication.ui.liked.LikedActivity;
+import com.example.myapplication.ui.logout.LogoutActivity;
 import com.example.myapplication.ui.profile.ProfileActivity;
+import com.example.myapplication.ui.saved.SavedActivity;
 import com.example.myapplication.ui.setting.SettingActivity;
 
 public class FilterFragment extends Fragment {
@@ -23,7 +26,10 @@ public class FilterFragment extends Fragment {
 
         Button settingsButton = view.findViewById(R.id.button_settings);
         Button profileButton = view.findViewById(R.id.button_profile);
-        // Add more buttons as needed
+        Button savedButton = view.findViewById(R.id.button_saved);
+        Button likedButton = view.findViewById(R.id.button_liked);
+        Button logoutButton = view.findViewById(R.id.button_logout);
+
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,7 +44,24 @@ public class FilterFragment extends Fragment {
             }
         });
 
-        // Add onClickListeners for other buttons similarly
+        savedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openSaved();
+            }
+        });
+        likedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLiked();
+            }
+        });
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLogout();
+            }
+        });
 
         return view;
     }
@@ -50,6 +73,21 @@ public class FilterFragment extends Fragment {
 
     private void openProfile() {
         Intent intent = new Intent(getActivity(), ProfileActivity.class);
+        startActivity(intent);
+    }
+
+    private void openSaved() {
+        Intent intent = new Intent(getActivity(), SavedActivity.class);
+        startActivity(intent);
+    }
+
+    private void openLiked() {
+        Intent intent = new Intent(getActivity(), LikedActivity.class);
+        startActivity(intent);
+    }
+
+    private void openLogout() {
+        Intent intent = new Intent(getActivity(), LogoutActivity.class);
         startActivity(intent);
     }
 }

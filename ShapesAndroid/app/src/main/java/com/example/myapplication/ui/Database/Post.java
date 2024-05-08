@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.post;
+package com.example.myapplication.ui.Database;
 
 public class Post {
     private int id;

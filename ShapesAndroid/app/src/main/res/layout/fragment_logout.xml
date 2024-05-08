@@ -1,28 +1,67 @@
-<!-- activity_logout.xml -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="30dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".ui.login.LoginActivity">
 
-    <TextView
-        android:id="@+id/logout_message"
-        android:layout_width="wrap_content"
+    <!-- Top Layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
-        android:text="@string/Logout_message"
-        android:textSize="20sp"
-        android:layout_centerInParent="true" />
+        tools:ignore="InefficientWeight">
 
-    <Button
-        android:id="@+id/logout_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/logout"
-        android:layout_below="@id/logout_message"
-        android:layout_centerHorizontal="true"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
 
-</RelativeLayout>
+            <ImageView
+                android:id="@+id/button_back"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="@string/back"
+                android:focusable="true"
+                android:src="@drawable/ic_back"
+                android:clickable="true"
+                android:onClick="Back" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/logout_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Logout_message"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/logout_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/logout" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
