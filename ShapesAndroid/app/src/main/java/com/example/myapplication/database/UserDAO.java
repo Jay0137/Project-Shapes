@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.database.users;
+package com.example.myapplication.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,12 +6,12 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.myapplication.ui.database.DatabaseHelper;
+import com.example.myapplication.DatabaseHelper;
 
 public class UserDAO {
 
     private SQLiteDatabase database;
-    private DatabaseHelper dbHelper;
+    private final DatabaseHelper dbHelper;
 
     public UserDAO(Context context) {
         dbHelper = new DatabaseHelper(context);
@@ -57,7 +57,6 @@ public class UserDAO {
     }
 
     public boolean authenticateUser(String email, String password) {
-        // Define the columns you want to retrieve
         String[] projection = {
                 DatabaseHelper.COLUMN_ID,
                 DatabaseHelper.COLUMN_NAME,
@@ -66,11 +65,9 @@ public class UserDAO {
                 DatabaseHelper.COLUMN_PASSWORD
         };
 
-        // Define the selection criteria
         String selection = DatabaseHelper.COLUMN_EMAIL + "=? AND " + DatabaseHelper.COLUMN_PASSWORD + "=?";
         String[] selectionArgs = {email, password};
 
-        // Execute the query
         Cursor cursor = database.query(
                 DatabaseHelper.TABLE_NAME,
                 projection,
@@ -81,10 +78,8 @@ public class UserDAO {
                 null
         );
 
-        // Check if the cursor contains any rows (i.e., if a user with the provided email and password exists)
         boolean isAuthenticated = cursor != null && cursor.getCount() > 0;
 
-        // Close the cursor
         if (cursor != null) {
             cursor.close();
         }

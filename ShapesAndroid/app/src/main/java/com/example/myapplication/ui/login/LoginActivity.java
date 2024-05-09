@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.ui.database.users.UserDAO;
+import com.example.myapplication.database.UserDAO;
 import com.example.myapplication.ui.register.RegisterActivity;
 
 public class LoginActivity extends Activity {

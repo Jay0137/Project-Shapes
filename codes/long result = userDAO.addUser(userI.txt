@@ -1,0 +1,12 @@
+                long result = userDAO.addUser(userId, name, username, email, password);
+                userDAO.close();
+
+                // Check if the user was successfully added to the database
+                if (result != -1) {
+                    // Display success message and navigate to LoginActivity
+                    Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                    navigateToLogin(v);
+                } else {
+                    // Display error message if user registration failed
+                    Toast.makeText(RegisterActivity.this, "Failed to register user", Toast.LENGTH_SHORT).show();
+                }

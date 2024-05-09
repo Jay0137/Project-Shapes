@@ -2,14 +2,16 @@ package com.example.myapplication.ui.register;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.ui.database.users.UserDAO;
+import com.example.myapplication.database.UserDAO;
 import com.example.myapplication.ui.login.LoginActivity;
 import com.example.myapplication.ui.watcher.EmailTextWatcher;
 import com.example.myapplication.ui.watcher.MinLetterTextWatcher;
@@ -64,17 +66,25 @@ public class RegisterActivity extends Activity {
                 // Add the user to the database along with the generated ID
                 UserDAO userDAO = new UserDAO(RegisterActivity.this);
                 userDAO.open();
-                long result = userDAO.addUser(userId, name, username, email, password);
-                userDAO.close();
-
-                // Check if the user was successfully added to the database
-                if (result != -1) {
-                    // Display success message and navigate to LoginActivity
-                    Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
-                    navigateToLogin(v);
-                } else {
-                    // Display error message if user registration failed
-                    Toast.makeText(RegisterActivity.this, "Failed to register user", Toast.LENGTH_SHORT).show();
+                try {
+                    long result = userDAO.addUser(userId, name, username, email, password);
+                    if (result != -1) {
+                        // Display success message and navigate to LoginActivity
+                        Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                        navigateToLogin(v);
+                        System.out.println("crated");
+                    } else {
+                        // Display error message if user registration failed
+                        Toast.makeText(RegisterActivity.this, "Failed to register user", Toast.LENGTH_SHORT).show();
+                        System.out.println("failed");
+                    }
+                } catch (SQLiteException e) {
+                    // Log any SQL exceptions
+                    Log.e("RegisterActivity", "Error adding user to database", e);
+                    Toast.makeText(RegisterActivity.this, "Failed to register user. Please try again.", Toast.LENGTH_SHORT).show();
+                    System.out.println("AAAAHHHHHHH!!!!!");
+                } finally {
+                    userDAO.close(); // Ensure database is always closed
                 }
 
 
