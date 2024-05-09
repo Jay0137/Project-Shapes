@@ -51,6 +51,8 @@ public class RegisterActivity extends Activity {
                 String username = usernameEditText.getText().toString();
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
+                System.out.println("Button");
+                // the error is bellow this point in the code
 
                 // Validate user inputs (you can add more validation here)
 
@@ -58,25 +60,30 @@ public class RegisterActivity extends Activity {
                 if (name.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                     return;
-                }
+                } // this works perfectly fine
 
+
+                // the error start
                 // Generate a random and unique ID for the user
-                String userId = UUID.randomUUID().toString();
+                String userId = generateShortUUID(10);
 
                 // Add the user to the database along with the generated ID
                 UserDAO userDAO = new UserDAO(RegisterActivity.this);
                 userDAO.open();
                 try {
-                    long result = userDAO.addUser(userId, name, username, email, password);
+                    long result = userDAO.addUser(name, username, email, password);
                     if (result != -1) {
                         // Display success message and navigate to LoginActivity
                         Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                        Log.d("RegisterActivity", "User registration successful");
                         navigateToLogin(v);
                         System.out.println("crated");
                     } else {
                         // Display error message if user registration failed
                         Toast.makeText(RegisterActivity.this, "Failed to register user", Toast.LENGTH_SHORT).show();
                         System.out.println("failed");
+                        Log.e("RegisterActivity", "Failed to register user");
+                        //some what it always gives this result
                     }
                 } catch (SQLiteException e) {
                     // Log any SQL exceptions
@@ -88,8 +95,26 @@ public class RegisterActivity extends Activity {
                 }
 
 
+
+                // end  of the error
+
+
             }
         });
+    }
+
+    // Method to generate a shortened UUID
+    public String generateShortUUID(int length) {
+        // Generate a UUID
+        UUID uuid = UUID.randomUUID();
+
+        // Convert UUID to string
+        String uuidString = uuid.toString();
+
+        // Truncate UUID to the desired length
+        String truncatedUUID = uuidString.replaceAll("-", "").substring(0, length);
+
+        return truncatedUUID;
     }
 
     // Method to navigate to LoginActivity

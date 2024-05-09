@@ -25,15 +25,14 @@ public class UserDAO {
         dbHelper.close();
     }
 
-    public long addUser(String userId, String name, String username, String email, String password) {
+    public long addUser(String name, String username, String email, String password) {
         ContentValues values = new ContentValues();
-        values.put(DatabaseHelper.COLUMN_ID, userId);
         values.put(DatabaseHelper.COLUMN_NAME, name);
         values.put(DatabaseHelper.COLUMN_USERNAME, username);
         values.put(DatabaseHelper.COLUMN_EMAIL, email);
         values.put(DatabaseHelper.COLUMN_PASSWORD, password);
         return database.insert(DatabaseHelper.TABLE_NAME, null, values);
-    }
+    } // the add user is having issues
 
     public Cursor getUserByUsername(String username) {
         String[] projection = {

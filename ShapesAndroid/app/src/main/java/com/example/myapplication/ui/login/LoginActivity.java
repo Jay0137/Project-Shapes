@@ -28,7 +28,7 @@ public class LoginActivity extends Activity {
         // Check if user is already logged in
         if (isLoggedIn()) {
             launchMainActivity();
-            return;
+            //return;
         }
 
         setContentView(R.layout.fragment_login);
@@ -46,6 +46,8 @@ public class LoginActivity extends Activity {
                 String email = emailEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
 
+                System.out.println("running");
+
                 // Perform login authentication
                 authenticateUser(email, password);
             }
@@ -54,7 +56,7 @@ public class LoginActivity extends Activity {
 
     // Placeholder method for authentication logic
     private void authenticateUser(String email, String password) {
-// Check if the user exists in the database and if the provided email and password are correct
+        // Check if the user exists in the database and if the provided email and password are correct
         UserDAO userDAO = new UserDAO(LoginActivity.this);
         userDAO.open();
         boolean isAuthenticated = userDAO.authenticateUser(email, password);
@@ -62,6 +64,12 @@ public class LoginActivity extends Activity {
 
         // Check if authentication is successful
         if (isAuthenticated) {
+            // If authentication is successful, set the "logged_in" preference to true
+            SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("logged_in", true);
+            editor.apply();
+
             // If authentication is successful, launch MainActivity
             Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
             launchMainActivity();
@@ -79,7 +87,6 @@ public class LoginActivity extends Activity {
 
     // Method to check if the user is logged in (replace with your authentication logic)
     private boolean isLoggedIn() {
-        // You can implement your logic here to check if the user is already logged in
         // For demonstration purposes, always return false
         SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
 
@@ -91,6 +98,8 @@ public class LoginActivity extends Activity {
     private void launchMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        finish(); // Finish LoginFragment so that pressing back won't return to it
+       // finish(); // Finish LoginFragment so that pressing back won't return to it
     }
+
+
 }
