@@ -38,7 +38,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contextClickable="true"
-                android:text="@string/settings"/>
+                android:text="@string/settings"
+                android:textSize="18sp"/>
 
 
         </LinearLayout>
@@ -65,7 +66,8 @@
                 android:id="@+id/button_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/title_profile"/>
+                android:text="@string/title_profile"
+                android:textSize="18sp"/>
 
         </LinearLayout>
 
@@ -89,7 +91,8 @@
                 android:id="@+id/button_saved"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/title_saved"/>
+                android:text="@string/title_saved"
+                android:textSize="18sp"/>
 
         </LinearLayout>
 
@@ -113,7 +116,8 @@
                 android:id="@+id/button_liked"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/liked"/>
+                android:text="@string/liked"
+                android:textSize="18sp"/>
 
         </LinearLayout>
 
@@ -137,7 +141,8 @@
             android:id="@+id/button_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/logout"/>
+            android:text="@string/logout"
+            android:textSize="18sp"/>
 
     </LinearLayout>
 

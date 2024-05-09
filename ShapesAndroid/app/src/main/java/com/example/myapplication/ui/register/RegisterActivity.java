@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+// import com.example.myapplication.ui.database.users.UserDAO;
 import com.example.myapplication.ui.login.LoginActivity;
 import com.example.myapplication.ui.watcher.EmailTextWatcher;
 import com.example.myapplication.ui.watcher.MinLetterTextWatcher;
@@ -47,11 +48,31 @@ public class RegisterActivity extends Activity {
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
-                // You can perform further validation or process the user inputs here
-                // For example, you can validate if the inputs are not empty
+                // Validate user inputs (you can add more validation here)
 
-                // Display a toast message
-                Toast.makeText(RegisterActivity.this, "Sign up clicked!", Toast.LENGTH_SHORT).show();
+                // Check if any field is empty
+                if (name.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(RegisterActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Add the user to the database
+            //    UserDAO userDAO = new UserDAO(RegisterActivity.this);
+           //     userDAO.open();
+           //     long userId = userDAO.addUser(name, username, email, password);
+           //     userDAO.close();
+
+                // Check if the user was successfully added to the database
+            //    if (userId != -1) {
+            //        // Display success message and navigate to LoginActivity
+            //        Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+            //        navigateToLogin(v);
+            //    } else {
+                    // Display error message if user registration failed
+             //       Toast.makeText(RegisterActivity.this, "Failed to register user", Toast.LENGTH_SHORT).show();
+          //      }
+
+
             }
         });
     }

@@ -26,9 +26,11 @@
             android:id="@+id/editTextPost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/enter_your_post_here"
             android:autofillHints=""
-            android:inputType="text" />
+            android:inputType="textMultiLine"
+            android:maxLength="250"
+            android:textColor="@color/black"
+            android:maxLines="5" />
     </LinearLayout>
 
     <ImageView

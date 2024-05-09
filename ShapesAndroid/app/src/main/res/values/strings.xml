@@ -27,5 +27,9 @@
     <string name="title_saved">Saved</string>
     <string name="upload">Upload</string>
     <string name="username">Username</string>
+    <string name="bio">Bio</string>
+    <string name="profile_image">profile image</string>
+	<string name="profile_bg_image">profile_bg_image</string>
+	<string name="date_created">date created</string>
 
 </resources>
