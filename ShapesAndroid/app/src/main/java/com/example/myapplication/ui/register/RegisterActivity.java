@@ -9,10 +9,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-// import com.example.myapplication.ui.database.users.UserDAO;
+import com.example.myapplication.ui.database.users.UserDAO;
 import com.example.myapplication.ui.login.LoginActivity;
 import com.example.myapplication.ui.watcher.EmailTextWatcher;
 import com.example.myapplication.ui.watcher.MinLetterTextWatcher;
+
+import java.util.UUID;
 
 public class RegisterActivity extends Activity {
 
@@ -56,27 +58,29 @@ public class RegisterActivity extends Activity {
                     return;
                 }
 
-                // Add the user to the database
-            //    UserDAO userDAO = new UserDAO(RegisterActivity.this);
-           //     userDAO.open();
-           //     long userId = userDAO.addUser(name, username, email, password);
-           //     userDAO.close();
+                // Generate a random and unique ID for the user
+                String userId = UUID.randomUUID().toString();
+
+                // Add the user to the database along with the generated ID
+                UserDAO userDAO = new UserDAO(RegisterActivity.this);
+                userDAO.open();
+                long result = userDAO.addUser(userId, name, username, email, password);
+                userDAO.close();
 
                 // Check if the user was successfully added to the database
-            //    if (userId != -1) {
-            //        // Display success message and navigate to LoginActivity
-            //        Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
-            //        navigateToLogin(v);
-            //    } else {
+                if (result != -1) {
+                    // Display success message and navigate to LoginActivity
+                    Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
+                    navigateToLogin(v);
+                } else {
                     // Display error message if user registration failed
-             //       Toast.makeText(RegisterActivity.this, "Failed to register user", Toast.LENGTH_SHORT).show();
-          //      }
+                    Toast.makeText(RegisterActivity.this, "Failed to register user", Toast.LENGTH_SHORT).show();
+                }
 
 
             }
         });
     }
-
 
     // Method to navigate to LoginActivity
     public void navigateToLogin(View view) {

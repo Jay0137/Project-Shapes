@@ -2,6 +2,7 @@ package com.example.myapplication.ui.login;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.ui.database.users.UserDAO;
 import com.example.myapplication.ui.register.RegisterActivity;
 
 public class LoginActivity extends Activity {
@@ -44,27 +46,29 @@ public class LoginActivity extends Activity {
                 String email = emailEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
 
-                // Perform login authentication (replace with your authentication logic)
-                boolean isAuthenticated = authenticate(email, password);
-
-                // Check if authentication is successful
-                if (isAuthenticated) {
-                    // If authentication is successful, launch MainActivity
-                    Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                    launchMainActivity();
-                } else {
-                    // If authentication fails, show an error message
-                    Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
-                }
+                // Perform login authentication
+                authenticateUser(email, password);
             }
         });
     }
 
     // Placeholder method for authentication logic
-    private boolean authenticate(String username, String password) {
-        // Replace this with your actual authentication logic
-        // For simplicity, let's assume a hardcoded username and password for demonstration
-        return username.equals("admin") && password.equals("password");
+    private void authenticateUser(String email, String password) {
+// Check if the user exists in the database and if the provided email and password are correct
+        UserDAO userDAO = new UserDAO(LoginActivity.this);
+        userDAO.open();
+        boolean isAuthenticated = userDAO.authenticateUser(email, password);
+        userDAO.close();
+
+        // Check if authentication is successful
+        if (isAuthenticated) {
+            // If authentication is successful, launch MainActivity
+            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+            launchMainActivity();
+        } else {
+            // If authentication fails, show an error message
+            Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+        }
     }
 
     // Method to navigate to RegisterFragment
@@ -77,7 +81,10 @@ public class LoginActivity extends Activity {
     private boolean isLoggedIn() {
         // You can implement your logic here to check if the user is already logged in
         // For demonstration purposes, always return false
-        return false;
+        SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
+
+        // Check if there is any stored user data (assuming a key named "logged_in" is used)
+        return sharedPreferences.getBoolean("logged_in", false);
     }
 
     // Method to launch MainActivity
