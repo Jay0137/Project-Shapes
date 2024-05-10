@@ -47,11 +47,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_USERS);
     }
 
-    // Open the database
-    public void open() {
-        this.getWritableDatabase();
-    }
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
@@ -69,4 +64,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
     }
+
+
 }

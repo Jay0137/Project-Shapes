@@ -10,12 +10,22 @@
     android:layout_marginEnd="16dp"
     android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="6dp">
 
+        <!-- Background image -->
+        <ImageView
+            android:id="@+id/image_bg_profile"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_gravity="center"
+            android:src="@color/black"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/profile_bg_image"/>
+
+        <!-- Back Button -->
         <ImageView
             android:id="@+id/button_back"
             android:layout_width="48dp"
@@ -26,26 +36,15 @@
             android:clickable="true"
             android:onClick="Back" />
 
-    </LinearLayout>
+    </FrameLayout>
 
-
+    <!-- Main content layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
-
-        <ImageView
-            android:id="@+id/image_bg_profile"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:src="@color/black"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/profile_bg_image"
-            android:layout_marginBottom="6dp"/>
-
+        <!-- User profile information -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,8 +58,7 @@
                 android:layout_gravity="start"
                 android:src="@drawable/ic_profile"
                 android:scaleType="centerCrop"
-                android:contentDescription="@string/profile_image"
-                />
+                android:contentDescription="@string/profile_image"/>
 
             <!-- User Information -->
             <LinearLayout
@@ -76,53 +74,41 @@
                     android:layout_marginBottom="6dp"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:layout_gravity="start"
-                    android:text="@string/username"/>
+                    android:layout_gravity="start"/>
 
                 <TextView
-                    android:id="@+id/text_user_name"
+                    android:id="@+id/text_DateCreated"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:layout_gravity="start"
-                    android:text="@string/date_created"/>
+                    android:layout_gravity="start"/>
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
+        <!-- Bio TextView -->
+        <TextView
+            android:id="@+id/text_bio"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="vertical"
-            android:layout_marginTop="6dp"
-            android:layout_marginStart="6dp"
-            android:layout_marginEnd="6dp"
-            android:layout_marginBottom="16dp">
-
-            <TextView
-                android:id="@+id/text_bio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:layout_gravity="start"
-                android:text="@string/bio"
-                android:autofillHints=""
-                android:maxHeight="50dp"/>
-        </LinearLayout>
-
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewPosts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never" />
-        </ScrollView>
-
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_gravity="start"
+            android:autofillHints=""
+            android:maxHeight="50dp"
+            android:maxLines="4"/>
 
     </LinearLayout>
+
+    <!-- RecyclerView for posts -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewPosts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never" />
+    </ScrollView>
 
 </LinearLayout>
