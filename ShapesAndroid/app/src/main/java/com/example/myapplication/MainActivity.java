@@ -1,39 +1,38 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.myapplication.database.SessionManager;
 import com.example.myapplication.ui.login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
     private NavController navController;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-     
-        // Check if the user is logged in
-        if (!isLoggedIn()) {
+
+        sessionManager = new SessionManager(this);
+
+        // Check if session is not active, redirect to LoginActivity
+        if (!sessionManager.isSessionActive()) {
             redirectToLogin();
-
-        } else {
-            // If logged in, proceed with setting up the navigation
-            setupNavigation();
-            System.out.println("logged in");
+            return;
         }
+
+        // Call setupNavigation method
+        setupNavigation();
     }
-
-
     // Method to set up navigation using NavController and BottomNavigationView
     private void setupNavigation() {
         // Find the NavHostFragment
@@ -50,18 +49,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Method to check if the user is logged in
-    private boolean isLoggedIn() {
-        SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
-        // Check if the user is logged in by checking if the "user_id" key exists
-        return sharedPreferences.contains("user_id");
-    }
-
-    // Method to redirect to the login page
+    // Method to redirect to LoginActivity
     private void redirectToLogin() {
         Intent intent = new Intent(this, LoginActivity.class);
+        // Clear the back stack to prevent the user from returning to the MainActivity after login
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        // Finish the current activity to prevent the user from navigating back to it after logging in
+        // Finish the current activity to prevent the user from navigating back to it after login
         finish();
     }
 

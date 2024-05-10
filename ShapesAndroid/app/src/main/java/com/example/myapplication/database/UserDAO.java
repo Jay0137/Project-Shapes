@@ -8,6 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.example.myapplication.DatabaseHelper;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class UserDAO {
 
     private SQLiteDatabase database;
@@ -31,8 +35,9 @@ public class UserDAO {
         values.put(DatabaseHelper.COLUMN_USERNAME, username);
         values.put(DatabaseHelper.COLUMN_EMAIL, email);
         values.put(DatabaseHelper.COLUMN_PASSWORD, password);
+        values.put(DatabaseHelper.COLUMN_CREATED_AT, getCurrentDateTime());
         return database.insert(DatabaseHelper.TABLE_NAME, null, values);
-    } // the add user is having issues
+    }
 
     public Cursor getUserByUsername(String username) {
         String[] projection = {
@@ -53,6 +58,12 @@ public class UserDAO {
                 null,
                 null
         );
+    }
+
+    private String getCurrentDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 
     public boolean authenticateUser(String email, String password) {
@@ -85,5 +96,4 @@ public class UserDAO {
 
         return isAuthenticated;
     }
-
 }

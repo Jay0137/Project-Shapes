@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.database.SessionManager;
 import com.example.myapplication.database.UserDAO;
 import com.example.myapplication.ui.register.RegisterActivity;
 
@@ -20,18 +21,20 @@ public class LoginActivity extends Activity {
     private EditText emailEditText;
     private EditText passwordEditText;
     private Button loginButton;
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_login);
+
+        sessionManager = new SessionManager(this);
 
         // Check if user is already logged in
-        if (isLoggedIn()) {
+        if (sessionManager.isSessionActive()) {
             launchMainActivity();
-            //return;
+            return;
         }
-
-        setContentView(R.layout.fragment_login);
 
         // Initialize EditText and Button
         emailEditText = findViewById(R.id.Email);
@@ -45,8 +48,6 @@ public class LoginActivity extends Activity {
                 // Get username and password from EditText fields
                 String email = emailEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
-
-                System.out.println("running");
 
                 // Perform login authentication
                 authenticateUser(email, password);
@@ -64,10 +65,12 @@ public class LoginActivity extends Activity {
 
         // Check if authentication is successful
         if (isAuthenticated) {
-            // If authentication is successful, set the "logged_in" preference to true
-            SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean("logged_in", true);
+            // Generate session token
+            String sessionToken = sessionManager.generateSessionToken();
+
+            // Save session token
+            SharedPreferences.Editor editor = sessionManager.sharedPreferences.edit();
+            editor.putString("session_token", sessionToken);
             editor.apply();
 
             // If authentication is successful, launch MainActivity
@@ -79,27 +82,16 @@ public class LoginActivity extends Activity {
         }
     }
 
+    // Method to launch MainActivity
+    private void launchMainActivity() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        // finish(); // Finish LoginActivity so that pressing back won't return to it
+    }
+
     // Method to navigate to RegisterFragment
     public void navigateToRegister(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
-
-    // Method to check if the user is logged in (replace with your authentication logic)
-    private boolean isLoggedIn() {
-        // For demonstration purposes, always return false
-        SharedPreferences sharedPreferences = getSharedPreferences("user_session", MODE_PRIVATE);
-
-        // Check if there is any stored user data (assuming a key named "logged_in" is used)
-        return sharedPreferences.getBoolean("logged_in", false);
-    }
-
-    // Method to launch MainActivity
-    private void launchMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-       // finish(); // Finish LoginFragment so that pressing back won't return to it
-    }
-
-
 }

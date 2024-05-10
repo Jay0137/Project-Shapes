@@ -16,8 +16,6 @@ import com.example.myapplication.ui.login.LoginActivity;
 import com.example.myapplication.ui.watcher.EmailTextWatcher;
 import com.example.myapplication.ui.watcher.MinLetterTextWatcher;
 
-import java.util.UUID;
-
 public class RegisterActivity extends Activity {
 
     private EditText nameEditText, usernameEditText, emailEditText, passwordEditText;
@@ -51,7 +49,7 @@ public class RegisterActivity extends Activity {
                 String username = usernameEditText.getText().toString();
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-                System.out.println("Button");
+
                 // the error is bellow this point in the code
 
                 // Validate user inputs (you can add more validation here)
@@ -65,7 +63,6 @@ public class RegisterActivity extends Activity {
 
                 // the error start
                 // Generate a random and unique ID for the user
-                String userId = generateShortUUID(10);
 
                 // Add the user to the database along with the generated ID
                 UserDAO userDAO = new UserDAO(RegisterActivity.this);
@@ -77,11 +74,11 @@ public class RegisterActivity extends Activity {
                         Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
                         Log.d("RegisterActivity", "User registration successful");
                         navigateToLogin(v);
-                        System.out.println("crated");
+
                     } else {
                         // Display error message if user registration failed
                         Toast.makeText(RegisterActivity.this, "Failed to register user", Toast.LENGTH_SHORT).show();
-                        System.out.println("failed");
+
                         Log.e("RegisterActivity", "Failed to register user");
                         //some what it always gives this result
                     }
@@ -89,7 +86,7 @@ public class RegisterActivity extends Activity {
                     // Log any SQL exceptions
                     Log.e("RegisterActivity", "Error adding user to database", e);
                     Toast.makeText(RegisterActivity.this, "Failed to register user. Please try again.", Toast.LENGTH_SHORT).show();
-                    System.out.println("AAAAHHHHHHH!!!!!");
+
                 } finally {
                     userDAO.close(); // Ensure database is always closed
                 }
@@ -103,19 +100,7 @@ public class RegisterActivity extends Activity {
         });
     }
 
-    // Method to generate a shortened UUID
-    public String generateShortUUID(int length) {
-        // Generate a UUID
-        UUID uuid = UUID.randomUUID();
 
-        // Convert UUID to string
-        String uuidString = uuid.toString();
-
-        // Truncate UUID to the desired length
-        String truncatedUUID = uuidString.replaceAll("-", "").substring(0, length);
-
-        return truncatedUUID;
-    }
 
     // Method to navigate to LoginActivity
     public void navigateToLogin(View view) {

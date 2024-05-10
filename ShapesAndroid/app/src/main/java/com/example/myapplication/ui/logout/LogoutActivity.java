@@ -1,8 +1,6 @@
 package com.example.myapplication.ui.logout;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,24 +8,27 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
+import com.example.myapplication.database.SessionManager;
 import com.example.myapplication.ui.login.LoginActivity;
 
 
 public class LogoutActivity extends AppCompatActivity {
+
+    private SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_logout);
 
+        sessionManager = new SessionManager(this);
+
         Button logoutButton = findViewById(R.id.logout_button);
         logoutButton.setOnClickListener(new View.OnClickListener() {
         public void onClick(View v) {
-            // Perform logout action
-            // For example, clear user session, reset preferences, etc.
+             // Perform logout action
+            sessionManager.logout();
 
-            System.out.println("Logout");
-            clearSession();
 
             // Redirect the user to the login page
             Intent intent = new Intent(LogoutActivity.this, LoginActivity.class);
@@ -45,16 +46,6 @@ public class LogoutActivity extends AppCompatActivity {
         onBackPressed();
     }
 
-    private void clearSession() {
-        // Here you would put the logic to clear the user session
-        // This could involve clearing shared preferences, resetting flags, etc.
-        // Below is just a simple example assuming you're using SharedPreferences
-
-        SharedPreferences preferences = getSharedPreferences("user_session", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.clear(); // Clear all stored data
-        editor.apply();
-    }
 
 }
 
