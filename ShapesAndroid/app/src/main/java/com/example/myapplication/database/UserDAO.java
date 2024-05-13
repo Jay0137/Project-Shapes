@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.myapplication.DatabaseHelper;
 
@@ -96,4 +97,74 @@ public class UserDAO {
 
         return isAuthenticated;
     }
+
+    public long getUserIdByEmail(String email) {
+        String[] projection = {DatabaseHelper.COLUMN_ID};
+        String selection = DatabaseHelper.COLUMN_EMAIL + "=?";
+        String[] selectionArgs = {email};
+
+        Cursor cursor = database.query(
+                DatabaseHelper.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+
+        long userId = -1; // Default value if email is not found
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndex(DatabaseHelper.COLUMN_ID);
+                if (columnIndex != -1) {
+                    userId = cursor.getLong(columnIndex);
+                }
+            }
+            cursor.close();
+        }
+
+        return userId;
+    }
+
+    public UserDetails getUserDetailsByEmail(String email) {
+        Cursor cursor = database.query(
+                DatabaseHelper.TABLE_NAME,
+                new String[]{DatabaseHelper.COLUMN_USERNAME, DatabaseHelper.COLUMN_CREATED_AT, DatabaseHelper.COLUMN_BIO},
+                DatabaseHelper.COLUMN_EMAIL + "=?",
+                new String[]{email},
+                null,
+                null,
+                null
+        );
+
+        UserDetails userDetails = null;
+        if (cursor != null) {
+            Log.d("UserDAO", "Cursor count: " + cursor.getCount());
+            if (cursor.moveToFirst()) {
+                int columnIndexUsername = cursor.getColumnIndex(DatabaseHelper.COLUMN_USERNAME);
+                int columnIndexCreatedAt = cursor.getColumnIndex(DatabaseHelper.COLUMN_CREATED_AT);
+                int columnIndexBio = cursor.getColumnIndex(DatabaseHelper.COLUMN_BIO);
+                Log.d("UserDAO", "Column index for username: " + columnIndexUsername);
+                Log.d("UserDAO", "Column index for created_at: " + columnIndexCreatedAt);
+                Log.d("UserDAO", "Column index for bio: " + columnIndexBio);
+                if (columnIndexUsername >= 0 && columnIndexCreatedAt >= 0 && columnIndexBio >= 0) {
+                    String username = cursor.getString(columnIndexUsername);
+                    String createdAt = cursor.getString(columnIndexCreatedAt);
+                    String bio = cursor.getString(columnIndexBio);
+                    userDetails = new UserDetails(username, createdAt, "", bio); // Assuming profile picture is not used in this context
+                } else {
+                    Log.e("UserDAO", "Column index is invalid");
+                }
+            }
+            cursor.close();
+        }
+        return userDetails;
+    }
+
+
+
+
+
 }

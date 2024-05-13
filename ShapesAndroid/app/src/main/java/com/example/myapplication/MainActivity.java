@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -24,20 +25,25 @@ public class MainActivity extends AppCompatActivity {
 
         sessionManager = new SessionManager(this);
 
-        // Check if session is not active, redirect to LoginActivity
-        if (!sessionManager.isSessionActive()) {
-            redirectToLogin();
-            return;
-        }
+        // Log session status
+        Log.d("MainActivity", "Session active: " + sessionManager.isSessionActive());
 
-        // Call setupNavigation method
-        setupNavigation();
+        // Check if session is active and email is logged in
+        if (sessionManager.isSessionActive() && sessionManager.isLoggedInWithEmail()) {
+            // Call setupNavigation method
+            setupNavigation();
+        } else {
+            Log.d("MainActivity", "Redirecting to login");
+            // Redirect to LoginActivity
+            redirectToLogin();
+        }
     }
+
+
     // Method to set up navigation using NavController and BottomNavigationView
     private void setupNavigation() {
         // Find the NavHostFragment
-        NavHostFragment navHostFragment = (NavHostFragment)
-                getSupportFragmentManager().findFragmentById(R.id.nav_host_main);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_main);
 
         if (navHostFragment != null) {
             // Get the NavController from the NavHostFragment
@@ -46,6 +52,9 @@ public class MainActivity extends AppCompatActivity {
             // Set up BottomNavigationView with NavController
             BottomNavigationView bottomNav = findViewById(R.id.nav_view);
             NavigationUI.setupWithNavController(bottomNav, navController);
+        } else {
+            // If NavHostFragment is null, redirect to login
+            redirectToLogin();
         }
     }
 
@@ -58,5 +67,4 @@ public class MainActivity extends AppCompatActivity {
         // Finish the current activity to prevent the user from navigating back to it after login
         finish();
     }
-
 }

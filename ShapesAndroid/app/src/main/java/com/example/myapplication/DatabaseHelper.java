@@ -10,7 +10,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "ShapesDB";
+    public static final String DATABASE_NAME = "ShapesDB";
 
     // Table name
     public static final String TABLE_NAME = "users";
@@ -24,6 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_CREATED_AT = "created_at"; // New column for creation date
     public static final String COLUMN_PROFILE_PICTURE = "profile_picture"; // New column for profile picture
     public static final String COLUMN_BIO = "bio"; // New column for bio
+
     // Create table SQL query
     private static final String CREATE_TABLE_USERS =
             "CREATE TABLE " + TABLE_NAME + "("
@@ -62,8 +63,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (db != null && db.isOpen()) {
             db.close();
         }
-
     }
-
 
 }

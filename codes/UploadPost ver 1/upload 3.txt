@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
-import com.example.myapplication.database.SessionManager;
 
 public class UploadPostFragment extends Fragment {
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -23,7 +22,6 @@ public class UploadPostFragment extends Fragment {
     private Activity activity;
     private EditText editTextPost;
     private Uri imageUri; // Uri to store the selected image
-
 
     @Override
     public void onAttach(@NonNull Activity activity) {
@@ -39,13 +37,11 @@ public class UploadPostFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_add_post, container, false);
 
         editTextPost = rootView.findViewById(R.id.editTextPost);
         imageView = rootView.findViewById(R.id.upload);
-
-
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,16 +51,6 @@ public class UploadPostFragment extends Fragment {
         });
 
         return rootView;
-    }
-
-    private int getUserId() {
-        // Assuming you have a SessionManager class to manage user sessions
-        SessionManager sessionManager = new SessionManager(getActivity().getApplicationContext());
-
-        // Get the user id from the session manager
-        int userId = sessionManager.getUserId();
-
-        return userId;
     }
 
     private void openFileChooser() {
@@ -91,12 +77,4 @@ public class UploadPostFragment extends Fragment {
         // Clear EditText content when the fragment's view is destroyed
         editTextPost.setText("");
     }
-
-    /* Handle the upload button click
-     * Upload the selected image and text to the server
-     * and make a toast to indicate success or failure
-     * and if successful, navigate back to the home fragment
-     * if it is not successful, show an error message and stay in the same fragment
-     */
-
 }

@@ -2,7 +2,6 @@ package com.example.myapplication.ui.login;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -60,27 +59,36 @@ public class LoginActivity extends Activity {
         // Check if the user exists in the database and if the provided email and password are correct
         UserDAO userDAO = new UserDAO(LoginActivity.this);
         userDAO.open();
-        boolean isAuthenticated = userDAO.authenticateUser(email, password);
-        userDAO.close();
 
-        // Check if authentication is successful
-        if (isAuthenticated) {
-            // Generate session token
-            String sessionToken = sessionManager.generateSessionToken();
+        // Check if the email exists in the database
+        long emailId = userDAO.getUserIdByEmail(email);
+        if (emailId != -1) { // Email exists
+            // Check if the provided password matches the password for the given email
+            boolean isAuthenticated = userDAO.authenticateUser(email, password);
 
-            // Save session token
-            SharedPreferences.Editor editor = sessionManager.sharedPreferences.edit();
-            editor.putString("session_token", sessionToken);
-            editor.apply();
+            if (isAuthenticated) { // Password is correct
+                // Generate session token
+                String sessionToken = sessionManager.generateSessionToken();
 
-            // If authentication is successful, launch MainActivity
-            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-            launchMainActivity();
+                // Link session token to user ID and save it
+                sessionManager.saveSessionTokenForUser(emailId, sessionToken);
+
+                // If authentication is successful, launch MainActivity
+                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                launchMainActivity();
+            } else {
+                // If password is incorrect, show an error message
+                Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+            }
         } else {
-            // If authentication fails, show an error message
-            Toast.makeText(LoginActivity.this, "Invalid email or password", Toast.LENGTH_SHORT).show();
+            // If email doesn't exist, show an error message
+            Toast.makeText(LoginActivity.this, "Email doesn't exist", Toast.LENGTH_SHORT).show();
         }
+
+        userDAO.close();
     }
+
+
 
     // Method to launch MainActivity
     private void launchMainActivity() {
