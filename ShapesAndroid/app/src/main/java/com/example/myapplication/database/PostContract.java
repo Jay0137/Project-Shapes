@@ -1,6 +1,6 @@
 package com.example.myapplication.database;
 
-public class PostContract {
+public final class PostContract {
     private PostContract() {}
 
     public static class PostEntry {

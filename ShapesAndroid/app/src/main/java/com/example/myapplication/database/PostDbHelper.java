@@ -5,19 +5,16 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class PostDbHelper extends SQLiteOpenHelper {
+    private static final String DATABASE_NAME = "posts.db";
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "Post.db";
 
-    private static final String SQL_CREATE_ENTRIES =
+    private static final String SQL_CREATE_POST_TABLE =
             "CREATE TABLE " + PostContract.PostEntry.TABLE_NAME + " (" +
-                    PostContract.PostEntry.COLUMN_ID + " INTEGER PRIMARY KEY," +
+                    PostContract.PostEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     PostContract.PostEntry.COLUMN_USER_ID + " INTEGER," +
                     PostContract.PostEntry.COLUMN_TEXT + " TEXT," +
                     PostContract.PostEntry.COLUMN_IMAGE_PATH + " TEXT," +
                     PostContract.PostEntry.COLUMN_DATE + " TEXT)";
-
-    private static final String SQL_DELETE_ENTRIES =
-            "DROP TABLE IF EXISTS " + PostContract.PostEntry.TABLE_NAME;
 
     public PostDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -25,12 +22,11 @@ public class PostDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(SQL_CREATE_ENTRIES);
+        db.execSQL(SQL_CREATE_POST_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(SQL_DELETE_ENTRIES);
-        onCreate(db);
+        // Add upgrade logic here if needed
     }
 }
