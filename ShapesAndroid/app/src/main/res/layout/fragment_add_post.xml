@@ -23,12 +23,16 @@
 
         <EditText
             android:id="@+id/editTextPost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="290dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:hint="@string/content"
             android:autofillHints=""
+            android:textSize="20sp"
             android:inputType="textMultiLine"
             android:maxLength="250"
-            android:maxLines="5" />
+            android:maxLines="5"
+            android:background="@drawable/edit_text_border"/>
     </LinearLayout>
 
     <ImageView

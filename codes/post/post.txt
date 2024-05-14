@@ -1,0 +1,77 @@
+package com.example.myapplication.ui.posts;
+
+import java.util.Date;
+
+public class Post {
+    
+    private String username;
+    private String description;
+
+    private String imagePath;
+
+    private Date date;
+    private boolean liked; // Changed type to boolean
+    private boolean saved; // Changed type to boolean
+
+    // Constructor
+    public Post(String username, String description, String imagePath/*, boolean liked, boolean saved */) { // Changed types of likes and saved
+        this.username = username;
+        this.description = description;
+        this.imagePath = imagePath;
+        this.liked = liked;
+        this.saved = saved;
+
+     //   SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+      //  this.date = format.parse(dateString);
+    }
+
+
+    // Getters
+    public String getUsername() {
+        return username;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    // Getter for date
+    public Date getDate() {
+        return date;
+    }
+
+    // Setter for date
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public boolean isLiked() { // Changed method name to follow Java bean convention
+        return liked;
+    }
+
+    public boolean isSaved() {
+        return saved;
+    }
+
+    // Setter for like status
+    public void setLiked(boolean liked) {
+        this.liked = liked;
+    }
+
+    // Setter for saved status
+    public void setSaved(boolean saved) {
+        this.saved = saved;
+    }
+
+    public void toggleLikeStatus() {
+        liked = !liked; // Toggle the value of liked attribute
+    }
+
+    public void toggleSavedStatus() {
+        saved = !saved; // Toggle the value of saved attribute
+    }
+}

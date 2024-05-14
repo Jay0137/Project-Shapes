@@ -58,7 +58,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/title_profile"
+                android:contentDescription="@string/profile"
                 android:src="@drawable/ic_profile"
                 android:layout_gravity="center_vertical"/>
 
@@ -66,7 +66,7 @@
                 android:id="@+id/button_profile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/title_profile"
+                android:text="@string/profile"
                 android:textSize="18sp"/>
 
         </LinearLayout>
@@ -83,7 +83,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/title_saved"
+                android:contentDescription="@string/saved"
                 android:src="@drawable/ic_saved"
                 android:layout_gravity="center_vertical"/>
 
@@ -91,7 +91,7 @@
                 android:id="@+id/button_saved"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/title_saved"
+                android:text="@string/saved"
                 android:textSize="18sp"/>
 
         </LinearLayout>

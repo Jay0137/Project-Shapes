@@ -1,6 +1,7 @@
 package com.example.myapplication.ui.upload;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,19 +30,6 @@ public class UploadPostFragment extends Fragment {
     private Activity activity;
     private EditText editTextPost;
     private Uri imageUri; // Uri to store the selected image
-
-
-    @Override
-    public void onAttach(@NonNull Activity activity) {
-        super.onAttach(activity);
-        this.activity = activity;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        activity = null;
-    }
 
     @Nullable
     @Override
@@ -101,12 +89,6 @@ public class UploadPostFragment extends Fragment {
         }
     }
 
-    public void onDestroyView() {
-        super.onDestroyView();
-        // Clear EditText content when the fragment's view is destroyed
-        editTextPost.setText("");
-    }
-
     private void uploadPost() {
         // Check if both imageUri and editTextPost are not null or empty
         if (imageUri != null && !editTextPost.getText().toString().isEmpty()) {
@@ -150,6 +132,24 @@ public class UploadPostFragment extends Fragment {
         String formattedDate = dateFormat.format(currentDate);
 
         return formattedDate;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        activity = (Activity) context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        activity = null;
+    }
+
+    public void onDestroyView() {
+        super.onDestroyView();
+        // Clear EditText content when the fragment's view is destroyed
+        editTextPost.setText("");
     }
 
 }

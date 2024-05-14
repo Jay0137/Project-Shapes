@@ -31,4 +31,45 @@ public class PostDAO {
         close(); // Close the database connection
         return newRowId != -1;
     }
+
+   /* public List<Post> getAllPosts() {
+        List<Post> postList = new ArrayList<>();
+
+        // Define a query to select all posts
+        String query = "SELECT * FROM " + PostContract.PostEntry.TABLE_NAME;
+
+        // Open database connection
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        // Execute the query
+        Cursor cursor = db.rawQuery(query, null);
+
+        // Iterate over the cursor to extract post data
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                // Extract post data from cursor
+                String userId = cursor.getString(cursor.getColumnIndex(PostContract.PostEntry.COLUMN_USER_ID));
+                String text = cursor.getString(cursor.getColumnIndex(PostContract.PostEntry.COLUMN_TEXT));
+                String imagePath = cursor.getString(cursor.getColumnIndex(PostContract.PostEntry.COLUMN_IMAGE_PATH));
+               // String date = cursor.getString(cursor.getColumnIndex(PostContract.PostEntry.COLUMN_DATE));
+                // boolean liked = cursor.getInt(cursor.getColumnIndex(PostContract.PostEntry.COLUMN_LIKED)) == 1;
+                // boolean saved = cursor.getInt(cursor.getColumnIndex(PostContract.PostEntry.COLUMN_SAVED)) == 1;
+
+                // Create a new Post object and add it to the list
+                Post post = new Post(userId, text, imagePath);
+                postList.add(post);
+            } while (cursor.moveToNext());
+
+            // Close the cursor
+            cursor.close();
+        }
+
+        // Close database connection
+        db.close();
+
+        return postList;
+    }
+
+    */
+
 }

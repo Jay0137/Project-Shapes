@@ -1,37 +1,43 @@
 package com.example.myapplication.ui.home;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
-import com.example.myapplication.databinding.FragmentHomeBinding;
 
 public class HomeFragment extends Fragment {
+    /*
 
-    private FragmentHomeBinding binding;
+    private List<Post> postList;
+    private PostAdapter postAdapter;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        // Initialize RecyclerView
+        RecyclerView recyclerView = root.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        // Initialize PostAdapter and set it to RecyclerView
+        postList = new ArrayList<>();
+        postAdapter = new PostAdapter(postList);
+        recyclerView.setAdapter(postAdapter);
+
+        // Fetch posts and update the adapter
+        fetchPosts();
+
         return root;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    private void fetchPosts() {
+        // You need to implement the logic to fetch posts from your database or backend
+        // For example, if you have a PostDAO class to fetch posts from the database:
+        PostDAO postDAO = new PostDAO(getActivity());
+        postDAO.open();
+        postList.addAll(postDAO.getAllPosts()); // Assuming getAllPosts() returns a list of posts
+        postDAO.close();
+
+        // Notify the adapter that the dataset has changed
+        postAdapter.notifyDataSetChanged();
     }
+    */
 }

@@ -6,6 +6,7 @@ import java.util.UUID;
 
 public class SessionManager {
     public SharedPreferences sharedPreferences;
+    private static final String USER_ID_KEY = "user_id";
 
     public SessionManager(Context context) {
         sharedPreferences = context.getSharedPreferences("user_session", Context.MODE_PRIVATE);
@@ -44,8 +45,20 @@ public class SessionManager {
     }
 
     public int getUserId() {
-        // Retrieve user id from SharedPreferences
-        // Default value -1 indicates user id not found
-        return sharedPreferences.getInt("user_id", -1);
+        // Retrieve the user ID from SharedPreferences
+        String userIdString = sharedPreferences.getString(USER_ID_KEY, null);
+
+        // Convert the string to an integer
+        if (userIdString != null) {
+            try {
+                return Integer.parseInt(userIdString);
+            } catch (NumberFormatException e) {
+                // Handle parsing error
+                e.printStackTrace();
+            }
+        }
+
+        // Return a default value or handle the case when the user ID is not available
+        return -1; // or whatever default value you choose
     }
 }

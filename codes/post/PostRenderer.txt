@@ -1,0 +1,85 @@
+package com.example.myapplication.ui.posts;
+
+import android.content.Context;
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.myapplication.R;
+
+public class PostRenderer {
+
+    public static void renderPost(Context context, ViewGroup parentLayout, Post post) {
+        View view = LayoutInflater.from(context).inflate(R.layout.fragment_post, parentLayout, false);
+
+        // Initialize views
+        TextView tvProfile = view.findViewById(R.id.tvProfile); // Corrected id
+        TextView tvDescription = view.findViewById(R.id.tvDescription);
+        ImageView ivPostImage = view.findViewById(R.id.ivPostImage); // Corrected id
+        Button tvLikes = view.findViewById(R.id.tvLikes);
+        Button tvSaved = view.findViewById(R.id.tvSaved);
+        Button tvShare = view.findViewById(R.id.tvShare);
+
+        // Populate views with data from the post
+        tvProfile.setText(post.getUsername());
+        tvDescription.setText(post.getDescription());
+        // Set image from post image path using appropriate method like Picasso or Glide
+        // For example: Picasso.get().load(post.getImagePath()).into(ivPostImage);
+
+        tvLikes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Toggle the like status of the post
+                post.toggleLikeStatus(); // You need to implement this method in your Post class
+
+                // Update the text of the button based on the like status
+                if (post.isLiked()) {
+                    tvLikes.setText(context.getString(R.string.liked));
+                } else {
+                    tvLikes.setText(context.getString(R.string.like));
+                }
+            }
+        });
+
+        // Add click listeners for buttons if needed
+        tvSaved.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                post.toggleSavedStatus(); // You need to implement this method in your Post class
+
+                // Update the text of the button based on the like status
+                if (post.isSaved()) {
+                    tvLikes.setText(context.getString(R.string.saved));
+                } else {
+                    tvLikes.setText(context.getString(R.string.save));
+                }
+            }
+        });
+
+// Add click listener for share button
+        tvShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an Intent with ACTION_SEND
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+
+                // Set the MIME type
+                shareIntent.setType("text/plain");
+
+                // Set the content to share (post description)
+                shareIntent.putExtra(Intent.EXTRA_TEXT, post.getDescription());
+
+                // Start the activity to show the chooser dialog
+                context.startActivity(Intent.createChooser(shareIntent, "Share via"));
+            }
+        });
+
+
+        // Add the inflated view to the parent layout
+        parentLayout.addView(view);
+    }
+}

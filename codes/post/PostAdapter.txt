@@ -1,0 +1,65 @@
+package com.example.myapplication.ui.posts;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.myapplication.R;
+
+import java.util.List;
+
+public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
+
+    private List<Post> postList;
+
+    public PostAdapter(List<Post> postList) {
+        this.postList = postList;
+    }
+
+    @NonNull
+    @Override
+    public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_post, parent, false);
+        return new PostViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
+        Post post = postList.get(position);
+        holder.bind(post);
+    }
+
+    @Override
+    public int getItemCount() {
+        return postList.size();
+    }
+
+    public static class PostViewHolder extends RecyclerView.ViewHolder {
+        // Declare your views here
+        // Example:
+        // private TextView tvUsername;
+        // private TextView tvDescription;
+        // private ImageView ivPostImage;
+
+        public PostViewHolder(@NonNull View itemView) {
+            super(itemView);
+            // Initialize your views here
+            // Example:
+            // tvUsername = itemView.findViewById(R.id.tvUsername);
+            // tvDescription = itemView.findViewById(R.id.tvDescription);
+            // ivPostImage = itemView.findViewById(R.id.ivPostImage);
+        }
+
+        public void bind(Post post) {
+            // Bind post data to views here
+            // Example:
+            // tvUsername.setText(post.getUsername());
+            // tvDescription.setText(post.getDescription());
+            // Load post image using Glide or Picasso
+            // Glide.with(itemView).load(post.getImageUrl()).into(ivPostImage);
+        }
+    }
+}
