@@ -1,8 +1,52 @@
 package com.example.myapplication.ui.home;
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.myapplication.R;
+import com.example.myapplication.adapters.PostAdapter;
+import com.example.myapplication.model.Post;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFragment extends Fragment {
+
+
+    private RecyclerView recyclerViewPosts;
+    private PostAdapter postAdapter;
+    private List<Post> postList;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        recyclerViewPosts = view.findViewById(R.id.recyclerViewPosts);
+        recyclerViewPosts.setLayoutManager(new LinearLayoutManager(getActivity()));
+        postList = new ArrayList<>(); // Initialize your list of posts
+
+        // Initialize adapter and pass the list of posts
+        postAdapter = new PostAdapter(getActivity(), postList);
+        recyclerViewPosts.setAdapter(postAdapter);
+
+        return view;
+    }
+    //////////////////////////////////////////
+
+
+
+
+
+
+
+
     /*
 
     private List<Post> postList;

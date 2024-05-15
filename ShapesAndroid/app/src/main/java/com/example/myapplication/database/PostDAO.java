@@ -2,7 +2,13 @@ package com.example.myapplication.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.example.myapplication.model.Post;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PostDAO {
     private SQLiteDatabase database;
@@ -32,44 +38,39 @@ public class PostDAO {
         return newRowId != -1;
     }
 
-   /* public List<Post> getAllPosts() {
-        List<Post> postList = new ArrayList<>();
+    public List<Post> getAllPosts() {
+        open(); // Open the database connection
+        List<Post> posts = new ArrayList<>();
+        Cursor cursor = database.query(
+                PostContract.PostEntry.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        if (cursor != null) {
+            int userIdIndex = cursor.getColumnIndex(PostContract.PostEntry.COLUMN_USER_ID);
+            int textIndex = cursor.getColumnIndex(PostContract.PostEntry.COLUMN_TEXT);
+            int imagePathIndex = cursor.getColumnIndex(PostContract.PostEntry.COLUMN_IMAGE_PATH);
+            int dateIndex = cursor.getColumnIndex(PostContract.PostEntry.COLUMN_DATE);
 
-        // Define a query to select all posts
-        String query = "SELECT * FROM " + PostContract.PostEntry.TABLE_NAME;
-
-        // Open database connection
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        // Execute the query
-        Cursor cursor = db.rawQuery(query, null);
-
-        // Iterate over the cursor to extract post data
-        if (cursor != null && cursor.moveToFirst()) {
-            do {
-                // Extract post data from cursor
-                String userId = cursor.getString(cursor.getColumnIndex(PostContract.PostEntry.COLUMN_USER_ID));
-                String text = cursor.getString(cursor.getColumnIndex(PostContract.PostEntry.COLUMN_TEXT));
-                String imagePath = cursor.getString(cursor.getColumnIndex(PostContract.PostEntry.COLUMN_IMAGE_PATH));
-               // String date = cursor.getString(cursor.getColumnIndex(PostContract.PostEntry.COLUMN_DATE));
-                // boolean liked = cursor.getInt(cursor.getColumnIndex(PostContract.PostEntry.COLUMN_LIKED)) == 1;
-                // boolean saved = cursor.getInt(cursor.getColumnIndex(PostContract.PostEntry.COLUMN_SAVED)) == 1;
-
-                // Create a new Post object and add it to the list
-                Post post = new Post(userId, text, imagePath);
-                postList.add(post);
-            } while (cursor.moveToNext());
-
-            // Close the cursor
+            while (cursor.moveToNext()) {
+                int userId = cursor.getInt(userIdIndex);
+                String text = cursor.getString(textIndex);
+                String imagePath = cursor.getString(imagePathIndex);
+                String date = cursor.getString(dateIndex);
+                Post post = new Post(userId, text, imagePath, date);
+                posts.add(post);
+            }
             cursor.close();
         }
-
-        // Close database connection
-        db.close();
-
-        return postList;
+        close(); // Close the database connection
+        return posts;
     }
 
-    */
+
+
 
 }
