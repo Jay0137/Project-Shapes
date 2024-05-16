@@ -62,7 +62,9 @@
 				android:id="@+id/tvLikes"
 				android:layout_margin="5dp"
 				android:text="@string/likes"
-				app:drawableStartCompat="@drawable/ic_like" />
+				app:drawableStartCompat="@drawable/ic_like"
+				android:clickable="true"
+				android:focusable="true"/>
 
 			<TextView
 				android:layout_width="match_parent"
@@ -74,7 +76,9 @@
 				android:id="@+id/tvSaved"
 				android:layout_margin="5dp"
 				android:text="@string/saved"
-				app:drawableStartCompat="@drawable/ic_save" />
+				app:drawableStartCompat="@drawable/ic_save"
+				android:clickable="true"
+				android:focusable="true"/>
 
 			<TextView
 				android:layout_width="match_parent"
@@ -86,7 +90,9 @@
 				android:layout_weight="1"
 				android:id="@+id/tvShare"
 				android:text="@string/share"
-				app:drawableStartCompat="@drawable/ic_share" />
+				app:drawableStartCompat="@drawable/ic_share"
+				android:clickable="true"
+				android:focusable="true"/>
 		</LinearLayout>
 	</LinearLayout>
 </androidx.cardview.widget.CardView>

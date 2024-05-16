@@ -164,7 +164,38 @@ public class UserDAO {
     }
 
 
+    public boolean isUsernameExists(String username) {
+        Cursor cursor = database.query(
+                DatabaseHelper.TABLE_NAME,
+                new String[]{DatabaseHelper.COLUMN_ID},
+                DatabaseHelper.COLUMN_USERNAME + "=?",
+                new String[]{username},
+                null,
+                null,
+                null
+        );
+        boolean exists = cursor != null && cursor.getCount() > 0;
+        if (cursor != null) {
+            cursor.close();
+        }
+        return exists;
+    }
 
-
+    public boolean isEmailExists(String email) {
+        Cursor cursor = database.query(
+                DatabaseHelper.TABLE_NAME,
+                new String[]{DatabaseHelper.COLUMN_ID},
+                DatabaseHelper.COLUMN_EMAIL + "=?",
+                new String[]{email},
+                null,
+                null,
+                null
+        );
+        boolean exists = cursor != null && cursor.getCount() > 0;
+        if (cursor != null) {
+            cursor.close();
+        }
+        return exists;
+    }
 
 }
