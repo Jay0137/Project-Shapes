@@ -62,4 +62,9 @@ public class SessionManager {
         return -1; // or whatever default value you choose
     }
 
+    public String getUserEmail() {
+        // Retrieve the user email from SharedPreferences
+        return sharedPreferences.getString("active_email", "");
+    }
+
 }

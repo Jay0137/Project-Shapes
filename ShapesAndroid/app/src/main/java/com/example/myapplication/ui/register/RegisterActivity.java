@@ -37,7 +37,6 @@ public class RegisterActivity extends Activity {
         emailEditText.addTextChangedListener(new EmailTextWatcher(emailEditText));
         passwordEditText.addTextChangedListener(new MinLetterTextWatcher(passwordEditText, 8, 16));
 
-
         Button signUpButton = findViewById(R.id.buttonSignUp);
 
         // Set click listener for sign up button
@@ -50,21 +49,25 @@ public class RegisterActivity extends Activity {
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
-                // the error is bellow this point in the code
-
-                // Validate user inputs (you can add more validation here)
-
-                // Check if any field is empty
+                // Validate user inputs
                 if (name.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
                     return;
-                } // this works perfectly fine
+                }
 
+                // Check if username or email already exists in the database
+                if (isUsernameExists(username) && isEmailExists(email)) {
+                    Toast.makeText(RegisterActivity.this, "Username and Email already exists", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (isUsernameExists(username)) {
+                    Toast.makeText(RegisterActivity.this, "Username already exists", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (isEmailExists(email)) {
+                    Toast.makeText(RegisterActivity.this, "Email already exists", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                // the error start
-                // Generate a random and unique ID for the user
-
-                // Add the user to the database along with the generated ID
+                // Add the user to the database
                 UserDAO userDAO = new UserDAO(RegisterActivity.this);
                 userDAO.open();
                 try {
@@ -74,33 +77,39 @@ public class RegisterActivity extends Activity {
                         Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
                         Log.d("RegisterActivity", "User registration successful");
                         navigateToLogin(v);
-
                     } else {
                         // Display error message if user registration failed
                         Toast.makeText(RegisterActivity.this, "Failed to register user", Toast.LENGTH_SHORT).show();
-
                         Log.e("RegisterActivity", "Failed to register user");
-                        //some what it always gives this result
                     }
                 } catch (SQLiteException e) {
                     // Log any SQL exceptions
                     Log.e("RegisterActivity", "Error adding user to database", e);
                     Toast.makeText(RegisterActivity.this, "Failed to register user. Please try again.", Toast.LENGTH_SHORT).show();
-
                 } finally {
                     userDAO.close(); // Ensure database is always closed
                 }
-
-
-
-                // end  of the error
-
-
             }
         });
     }
 
+    // Method to check if a username already exists in the database
+    private boolean isUsernameExists(String username) {
+        UserDAO userDAO = new UserDAO(RegisterActivity.this);
+        userDAO.open();
+        boolean exists = userDAO.isUsernameExists(username);
+        userDAO.close();
+        return exists;
+    }
 
+    // Method to check if an email already exists in the database
+    private boolean isEmailExists(String email) {
+        UserDAO userDAO = new UserDAO(RegisterActivity.this);
+        userDAO.open();
+        boolean exists = userDAO.isEmailExists(email);
+        userDAO.close();
+        return exists;
+    }
 
     // Method to navigate to LoginActivity
     public void navigateToLogin(View view) {
