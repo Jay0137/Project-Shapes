@@ -9,7 +9,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.myapplication.database.SessionManager;
+import com.example.myapplication.database.session.SessionManager;
 import com.example.myapplication.ui.login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

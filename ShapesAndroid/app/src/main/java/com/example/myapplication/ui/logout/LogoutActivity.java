@@ -8,7 +8,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
-import com.example.myapplication.database.SessionManager;
+import com.example.myapplication.database.session.SessionManager;
 import com.example.myapplication.ui.login.LoginActivity;
 
 

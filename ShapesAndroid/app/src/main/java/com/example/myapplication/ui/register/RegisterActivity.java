@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.database.UserDAO;
+import com.example.myapplication.database.users.UserDAO;
 import com.example.myapplication.ui.login.LoginActivity;
 import com.example.myapplication.ui.watcher.EmailTextWatcher;
 import com.example.myapplication.ui.watcher.MinLetterTextWatcher;

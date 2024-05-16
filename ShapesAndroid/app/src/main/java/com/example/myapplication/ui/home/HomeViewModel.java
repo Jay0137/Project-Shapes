@@ -1,23 +1,30 @@
 package com.example.myapplication.ui.home;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import com.example.myapplication.model.Post;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeViewModel extends ViewModel {
-
-/*
-    private final MutableLiveData<String> mText;
+    private MutableLiveData<List<Post>> postList;
 
     public HomeViewModel() {
-        mText = new MutableLiveData<>();
+        postList = new MutableLiveData<>();
+        // Initialize the postList with an empty list or fetch data from database or API
+        postList.setValue(new ArrayList<>());
     }
 
-    public LiveData<String> getText() {
-        // Simulated data loading process
-        // For demonstration, let's say we're loading follow user post from a repository
-        // Replace this with data loading logic
-        String peopleData = "Follow post's data";
-        mText.setValue(peopleData);
-        return mText;
+    // Method to set the postList data
+    public void setPostList(List<Post> posts) {
+        postList.setValue(posts);
     }
- */
+
+    // Method to get the postList LiveData
+    public LiveData<List<Post>> getPostList() {
+        return postList;
+    }
+
+
 }

@@ -17,12 +17,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.myapplication.R;
-import com.example.myapplication.database.PostDAO;
-import com.example.myapplication.database.SessionManager;
+import com.example.myapplication.database.DatabaseHelper;
+import com.example.myapplication.database.posts.PostDAO;
+import com.example.myapplication.database.session.SessionManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 
 public class UploadPostFragment extends Fragment {
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -70,6 +72,31 @@ public class UploadPostFragment extends Fragment {
         return userId;
     }
 
+    private String getUserName() {
+        // Assuming you have a SessionManager class to manage user sessions
+        SessionManager sessionManager = new SessionManager(getActivity().getApplicationContext());
+
+        // Get the user id from the session manager
+        int userId = sessionManager.getUserId();
+
+        String userName = null;
+
+        // Query the database to fetch the username associated with the user ID
+        try (DatabaseHelper dbHelper = new DatabaseHelper(getActivity().getApplicationContext())) {
+            // Open the database connection
+            dbHelper.open();
+
+            // Retrieve the username from the database
+            userName = dbHelper.getUserName(userId);
+        } catch (Exception e) {
+            // Handle any exceptions that occur during database operations
+            e.printStackTrace(); // You can log the exception or handle it based on your application's requirements
+        }
+
+        return userName;
+    }
+
+
     private void openFileChooser() {
         Intent intent = new Intent();
         intent.setType("image/*");
@@ -95,31 +122,38 @@ public class UploadPostFragment extends Fragment {
             // Create an instance of the PostDAO class
             PostDAO postDAO = new PostDAO(getActivity().getApplicationContext());
 
-            // Open the database connection
-            postDAO.open();
+            try {
+                // Open the database connection
+                postDAO.open();
 
-            // Call the insertPost method on the instance with the current date
-            String currentDate = getCurrentDate();
-            boolean insertSuccess = postDAO.insertPost(getUserId(), imageUri.toString(), editTextPost.getText().toString(), currentDate);
+                // Call the insertPost method on the instance with the current date
+                String currentDate = getCurrentDate();
+                boolean insertSuccess = postDAO.insertPost(getUserId(), getUserName(), imageUri.toString(), editTextPost.getText().toString(), currentDate);
 
-            // Close the database connection
-            postDAO.close();
+                if (insertSuccess) {
+                    // Show success message
+                    Toast.makeText(activity, "Post created successfully", Toast.LENGTH_SHORT).show();
 
-            if (insertSuccess) {
-                // Show success message
-                Toast.makeText(activity, "Post created successfully", Toast.LENGTH_SHORT).show();
-
-                // Clear the EditText content
-                editTextPost.setText("");
-            } else {
-                // Show failure message
-                Toast.makeText(activity, "Failed to create post", Toast.LENGTH_SHORT).show();
+                    // Clear the EditText content
+                    editTextPost.setText("");
+                } else {
+                    // Show failure message
+                    Toast.makeText(activity, "Failed to create post", Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                // Show error message
+                Toast.makeText(activity, "An error occurred: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            } finally {
+                // Close the database connection in a finally block to ensure it's always closed
+                postDAO.close();
             }
         } else {
             // Show a message indicating that both image and text are required
             Toast.makeText(activity, "Please select an image and enter text", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 
     private String getCurrentDate() {
         // Create a SimpleDateFormat object with the desired date format

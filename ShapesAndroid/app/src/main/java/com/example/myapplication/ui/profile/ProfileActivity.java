@@ -8,9 +8,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
-import com.example.myapplication.database.SessionManager;
-import com.example.myapplication.database.UserDAO;
-import com.example.myapplication.database.UserDetails;
+import com.example.myapplication.database.session.SessionManager;
+import com.example.myapplication.database.users.UserDAO;
+import com.example.myapplication.database.users.UserDetails;
 
 public class ProfileActivity extends AppCompatActivity {
 

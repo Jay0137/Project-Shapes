@@ -2,6 +2,7 @@ package com.example.myapplication.model;
 
 public class Post {
     private int userId;
+    private static String username;
     private String text;
     private String imagePath;
     private String date;
@@ -11,6 +12,10 @@ public class Post {
         this.text = text;
         this.imagePath = imagePath;
         this.date = date;
+    }
+
+    public static String getUsername() {
+        return username;
     }
 
     // Add getters and setters here
